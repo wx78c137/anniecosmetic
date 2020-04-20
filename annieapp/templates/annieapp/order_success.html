@@ -1,0 +1,83 @@
+{% extends 'annieapp/base.html' %}
+{% load custom_filter %}
+{% load cropping %}
+{% block contents %}
+<div class="row">
+  <div class="col-md-10 mx-auto my-5">
+    <div class="block-checkout success-order">
+      <div class="success-image"></div>
+      <div class="success-title">Đặt hàng thành công!</div>
+      <div class="success-caption">Cảm ơn bạn đã đặt hàng tại Annie Cosmetic.</div>
+      <div class="success-order-info">
+        <div class="success-info-title">Mã đơn hàng: {{order.order_code}}</div>
+        <table class="success-order-detail-info table table-hover table-striped">
+          <thead>
+            <tr>
+              <th colspan="2">Sản phẩm</th>
+              <th class="text-center">Số lượng</th>
+              <th class="text-right">Thành tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for item in order_items %}
+            <tr>
+              <td width="80">
+                <img src="{% cropped_thumbnail item.product_version.product "cropping_img_1" %}" width="100%">
+              </td>
+              <td>
+                <a href="/products/{{ item.product_version.product.id }}" target="_blank" class="product-name">
+                  {% if item.product_version.name == 'none' %}
+                  {{ item.product_version.product.name }}
+                  {% else %}
+                  {{ item.product_version.product.name }} " + Tùy chọn: " {{ item.product_version.name }}
+                  {% endif %}
+                </a>
+                <div class="product-price">{{item.product_version.product.price | thousand_seperator }} đ</div>
+                <strike class="product-original-price">{{item.product_version.product.stock_price}}</strike>
+              </td>
+              <td class="text-center">{{item.quantity}}</td>
+              <td class="text-right" rowspan="1">
+                <strong>{{ item.get_cost | thousand_seperator }} đ</strong>
+              </td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td colspan="3" class="text-right"><b>Phí vận chuyển</b></td>
+              <td class="text-right"><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td colspan="3" class="text-right"><b>Thanh toán</b></td>
+              <td class="text-right"><strong>{{order.get_total_cost | thousand_seperator }} đ</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr class="my-5">
+
+        <div class="success-info-title">Thông tin giao hàng</div>
+        <table class="success-author-info table table-hover table-striped mb-5">
+          <tbody>
+            <tr>
+              <td width="30%">Họ tên:</td>
+              <td>{{order.name}}</td>
+            </tr>
+            <tr>
+              <td width="30%">Số điện thoại:</td>
+              <td>{{order.phone_number}}</td>
+            </tr>
+            <tr>
+              <td width="30%">Địa chỉ</td>
+              <td>{{order.address}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="success-caption">Đơn hàng của quý khách sẽ được vận chuyển trong thời gian sớm nhất.<br>
+        Chân thành cảm ơn quý khách đã mua hàng.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

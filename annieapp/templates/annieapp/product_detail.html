@@ -1,0 +1,184 @@
+{% extends 'annieapp/base.html' %}
+{% load widget_tweaks %}
+{% load custom_filter %}
+{% load cropping %}
+{% block contents %}
+<ol class="breadcrumb">
+
+  <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+
+
+  <li class="breadcrumb-item active">{{product.name}}</li>
+
+</ol>
+
+<div class="block-single">
+  <div class="row row-mx-10 mb-4">
+    <div class="col-md-4">
+      <div class="block-single-images">
+        <div class="xzoom-container">
+          <img class="xzoom" id="mainImage" width="100%" src="{% cropped_thumbnail product "cropping_img_1" %}" xoriginal="{% cropped_thumbnail product "cropping_img_1" %}">
+        </div>
+        <div class="xzoom-thumbs" id="xzoomThumbs_origin">
+          <a href="{{ product.product_img1.url }}">
+            <img class="xzoom-gallery" height="50" src="{% cropped_thumbnail product "cropping_img_1" %}" xpreview="{% cropped_thumbnail product "cropping_img_1" %}" alt="{{product.name}}" title="{{product.name}}">
+          </a>
+          {% if product.product_img2 %}
+          <a href="{{ product.product_img2.url }}">
+            <img class="xzoom-gallery" height="50" src="{% cropped_thumbnail product "cropping_img_2" %}" xpreview="{% cropped_thumbnail product "cropping_img_2" %}" alt="{{product.name}}" title="{{product.name}}">
+          </a>
+          {% endif %}
+          {% if product.product_img3 %}
+          <a href="{{ product.product_img3.url }}">
+            <img class="xzoom-gallery" height="50" src="{% cropped_thumbnail product "cropping_img_3" %}" xpreview="{% cropped_thumbnail product "cropping_img_3" %}" alt="{{product.name}}" title="{{product.name}}">
+          </a>
+          {% endif %}
+        </div>
+
+
+      </div>
+    </div>
+    <div class="col-md-5 mb-4">
+      <div class="block-single-info">
+        <div class="block-single-brand">
+          <a href="#">{{product.category.name}}</a>
+        </div>
+        <div class="block-single-name">{{product.name}}</div>
+        <div class="block-single-version-select" id="originalVersion">
+          <hr class="mb-1">
+          <div class="block-single-price">
+            {{product.price | thousand_seperator}} đ
+            <strike style="font-size: 1rem;color: #676767">{{product.stock_price | thousand_seperator}} đ</strike>
+          </div>
+        </div>
+
+
+
+        <form action="" method="POST" id="singleForm">
+          {% csrf_token %}
+
+
+          <div class="block-single-versions">
+            <div class="mb-1">Tùy chọn: <span id="versionName">{{ product.name }}</span></div>
+            {% for choice in choices %}
+            {% if choice %}
+            <label class="text">
+              <input type="radio" name="version_id" value="{{choice.id}}" data-id="{{choice.name}}" data-name="{{ choice.name }}" required>
+              <span>{{ choice.name }}</span>
+            </label>
+            {% endif %}
+            {% endfor %}
+            <div style="position: relative;"><label id="version_id-error" class="error" for="version_id" style="display: none;"></label></div>
+          </div>
+
+
+          <div class="block-single-quantity">
+            Số lượng:
+            <div class="custom-number">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button type="button" class="btn quantity-minus" onclick="quantity_sub(event);">-</button>
+                </span>
+                {% render_field form.quantity id="quantity" value="1" min="1"%}
+
+                <span class="input-group-btn">
+                  <button type="button" class="btn quantity-plus" onclick="quantity_add(event);">+</button>
+                </span>
+              </div>
+            </div>
+            <label id="quantity-error" class="error" for="quantity" style="display: none;"></label>
+          </div>
+
+          <div class="block-single-actions">
+            <button name="add_to_cart" type="submit" class="btn btn-add-to-cart">Thêm vào giỏ hàng</button>
+            <button name="buy" class="btn btn-buy">Mua ngay</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="block-single-policy mb-4">
+        <div class="block-single-policy-title">DUY NHẤT TẠI ANNIE</div>
+        <div class="block-single-policy-body">
+          <a class="block-single-policy-item" href="#" style="color: #676767">
+            <div>
+              <img src="https://fistore.vn/images/ico/single-policy-1.png">
+            </div>
+            <span>Chính chủ Hàn Quốc.</span>
+          </a>
+          <a class="block-single-policy-item" href="#" style="color: #676767">
+            <div>
+              <img src="https://fistore.vn/images/ico/single-policy-2.jpg">
+            </div>
+            <span>Mức giá cạnh tranh.</span>
+          </a>
+          <a class="block-single-policy-item" href="#" style="color: #676767">
+            <div>
+              <img src="https://fistore.vn/images/ico/single-policy-3.png">
+            </div>
+            <span>Đối tác chính thức của 3CE, Black Rouge, I’m Meme</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-single-content mb-4">
+    <div class="block-single-header">Mô tả sản phẩm</div>
+    <div class="block-single-content-body" style="">
+      <p class="text-center">
+        {% if product.product_detail %}
+        <img alt="" src="{{ product.product_detail.url}}">
+        {% endif %}
+      </p>
+    </div>
+    <p class="show-more" style="display: none;" onclick="readmore('block-single-content-body');">
+      <a id="xem-them-bai-viet" href="javascript:;" class="readmore">Đọc thêm</a>
+    </p>
+  </div>
+
+
+
+  <div class="block-single-related mb-4">
+    <div class="block-single-header">Gợi ý sản phẩm cho bạn</div>
+    <div class="block-single-related-body">
+      <div class="owl-carousel product-slider">
+        {% for product in same_products %}
+        <div class="item">
+          <div class="item-product">
+            <div class="item-thumbnail item-thumbnail1">
+              <a href="/products/{{ product.pk }}">
+                <img src="{{ product.product_img1.url }}" alt="{{  product.name }}">
+              </a>
+              <label class="saleof"> -{{ product.sale_off }}%</label>
+            </div>
+            <div class="item-info item-info1">
+              <div class="item-brand-name">
+                <a href="#">{{ product.category.name }}</a>
+              </div>
+              <div class="item-name">
+                <a href="/products/{{ product.pk }}">{{ product.name }}</a>
+              </div>
+              <div class="item-price">
+                {{product.price | thousand_seperator}} đ
+                <strike class="fz-down-1 text-muted">{{product.stock_price | thousand_seperator}} đ</strike>
+              </div>
+              <div class="item-action">
+                <a href="/products/{{ product.pk }}" class="btn btn-primary btn-block">XEM NGAY</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'annieapp/base.html' %}
+{% block contents %}
+<div class="row">
+  <div class="col-md-3">
+    <aside class="block-user d-none d-md-block mt-4 mb-4">
+      <div class="user-describe">
+        <div class="user-info">
+          <div class="user-name">{{request.user.username}}</div>
+          <div class="user-email">{{request.user.email}}</div>
+        </div>
+      </div>
+
+      <li class="menu-item profile">
+        <a href="#"><i class="fa fa-user-circle-o fa-fw fa-lg"></i>Thông tin cá nhân</a>
+      </li>
+      <li class="menu-item order">
+        <a href="/accounts/history"><i class="fa fa-calendar fa-fw fa-lg"></i>Quản lý đơn hàng</a>
+      </li>
+      <li class="menu-item">
+        <a href="/accounts/logout"><i class="fa fa-sign-out fa-fw fa-lg"></i>Thoát tài khoản</a>
+      </li>
+    </aside>
+  </div>
+  <div class="col-md-9">
+
+    <div class="table-responsive">
+      <table class="table-user table table-striped mt-4 mb-5">
+        <thead>
+          <tr>
+            <th>Mã đơn hàng</th>
+            <th>Ngày mua</th>
+            <th>Sản phẩm</th>
+            <th class="text-right">Tổng tiền</th>
+            <th class="text-right">Trạng thái đơn hàng</th>
+          </tr>
+        </thead>
+        {% for order in orders %}
+        <tbody>
+          <td>{{order.order_code}}</td>
+
+          <td>{{ order.created }}</td>
+          <td>
+            {% for item in order.items.all  %}
+            {{item.product_version}},
+            {% endfor %}
+          </td>
+          <td>{{ order.total_cost }}</td>
+          {% if order.paid %}
+          <td>Hoàn thành</td>
+          {% elif order.confirm %}
+          <td>Đã xác nhận</td>
+          {% else %}
+          <td>Chờ xác nhận</td>
+          {% endif %}
+
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'annieapp/base.html' %}
+{% load cropping %}
+{% load custom_filter %}
+{% block contents %}
+<ol class="breadcrumb">
+
+  <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+
+  {% if brand %}
+  <li class="breadcrumb-item"><a href="#">Thương hiệu</a></li>
+  <li class="breadcrumb-item active">{{brand.name}}</li>
+  {% elif category %}
+  <li class="breadcrumb-item active">{{category.name}}</li>
+  {% elif page_name %}
+  <li class="breadcrumb-item active">{{page_name}}</li>
+  {% endif %}
+
+</ol>
+
+
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="block-products">
+      <div class="block-header">
+        {% if brand %}
+        <div class="block-title"> {{brand.name}}: <strong>{{products.count}}</strong> kết quả</div>
+        {% elif category %}
+        <div class="block-title"> {{category.name}}: <strong>{{products.count}}</strong> kết quả</div>
+        {% elif page_name %}
+        <div class="block-title"> {{page_name}}: <strong>{{products.count}}</strong> kết quả</div>
+        {% endif %}
+
+      </div>
+      <div class="block-body">
+        <div class="row row-mx-10">
+
+          {% for product in page_obj %}
+          <div class="col-6 col-md-4 col-lg-3 mb-4">
+            <div class="item-product">
+              <div class="item-thumbnail item-thumbnail1">
+                <a href="/products/{{product.id}}">
+                  <img src="{% cropped_thumbnail product "cropping_img_1" %}" alt="{{product.name}}" title="{{product.name}}">
+                </a>
+                <label class="saleof">-{{product.sale_off}}%</label>
+              </div>
+              <div class="item-info item-info1">
+                <div class="item-brand-name">
+                  <a href="/brands/black-rouge">{{product.brand.name}}</a>
+                </div>
+                <div class="item-name">
+                  <a href="/products/{{product.id}}">{{product.name}}</a>
+                </div>
+                <div class="item-price">
+                  {{product.price |thousand_seperator}}
+                  <strike class="fz-down-1 text-muted">{{product.stock_price | thousand_seperator }}</strike>
+                </div>
+                <div class="item-action">
+                  <a href="/products/{{product.id}}" class="btn btn-primary btn-block">XEM NGAY</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+
+
+        </div>
+      </div>
+      <div class="block-footer">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1">
+              <i class="fa fa-angle-double-left"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+          </li>
+          {% endif %}
+
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+          </li>
+
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+              <i class="fa fa-angle-double-right"></i>
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

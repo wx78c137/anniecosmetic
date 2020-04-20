@@ -1,0 +1,466 @@
+{% load static %}
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+  <meta name="description" content="ANNIE COSMETIC - là sàn thương mại điện tử về mỹ phẩm -  phân phối mỹ phẩm chính hãng BLACK ROUGE và các thương hiệu khác.">
+
+
+  <meta name="keywords" content="" />
+
+  <meta name="author" content="Công ty TNHH DM&amp;C" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta property="og:url" content="http://anniecosmetic.vn" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ANNIE COSMETIC - Làm đẹp chuẩn Hàn, An tâm chính hãng!" />
+  <meta property="og:description" content="ANNIE COSMETIC - là sàn thương mại điện tử về mỹ phẩm - phân phối mỹ phẩm chính hãng BLACK ROUGE và các thương hiệu khác." />
+  <meta property="og:image" content="{% static 'images/255x59-02.png' %}" />
+
+  <title>ANNIE COSMETIC - Làm đẹp chuẩn Hàn, An tâm chính hãng!</title>
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  <link rel="icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'libs/jquery-ui/1.12.1/jquery-ui.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'libs/bootstrap/4-4.0.0-beta/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'libs/sweetalert/2v7.0.9/sweetalert.min.css' %}">
+  <link rel="stylesheet" href="{% static 'libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Varela+Round&amp;subset=latin-ext,vietnamese">
+  <link rel="stylesheet" href="{% static 'libs/owl-carousel/2v2.2.1/owl.carousel.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobilebar.css' %}">
+  <link rel="stylesheet" href="{% static 'libs/xzoom/1.0.8/xzoom.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+  <script src="{% static 'libs/jquery/jquery-3.3.1.min.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{% static 'libs/jquery-ui/1.12.1/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'libs/popper/1.14.3/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'libs/bootstrap/4-4.0.0-beta/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'libs/sweetalert/2v7.0.9/sweetalert.min.js' %}"></script>
+  <script src="{% static 'js/countdown.handler.js' %}"></script>
+  <script src="{% static 'libs/jquery-validation/1.17.0/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'libs/jquery-validation/1.17.0/localization/messages_vi.js' %}"></script>
+  <script src="https://kit.fontawesome.com/8ca29e9b4c.js" crossorigin="anonymous"></script>
+  <script src="{% static 'libs/owl-carousel/2v2.2.1/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'libs/bar-rating-master/jquery.barrating.min.js' %}"></script>
+  <script src="{% static 'libs/xzoom/1.0.8/xzoom.min.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+  <!-- Google API -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147716547-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-147716547-2');
+  </script>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TR3WC25');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- harafunnel -->
+  <script src="//harafunnel.com/widget/1882121868702051.js" async="async"></script>
+  <style>
+    .fb_customer_chat_bubble_animated_no_badge {
+      bottom: 60pt !important;
+      right: 6pt !important;
+    }
+  </style>
+
+</head>
+
+<body class="scrollbar">
+
+  <!-- Google API -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TR3WC25" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="overlay" onclick="close_nav()"></div>
+
+
+  <nav id="navMobile">
+    <div class="left">
+      <button type="button" class="btn btn-default" onclick="open_nav()">
+        <svg id="i-menu" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24" />
+        </svg>
+      </button>
+    </div>
+    <div class="center">
+      <a href="/">
+        <img src="{% static 'images/255x59-02.png' %}" class="margin-left-10" alt="">
+      </a>
+    </div>
+    <div class="right">
+      <a href="/checkout/cart">
+        <img src="{% static 'images/cart-icon.png' %}">
+        <span class="data-cart-count">{{cart_len}}</span>
+      </a>
+      <span class="dropdown dropdown-hover">
+        <div data-toggle="dropdown"><i class="fa fa-user-circle"></i></div>
+        <div class="dropdown-menu dropdown-menu-right">
+          {% if not user.is_authenticated %}
+          <a class="dropdown-item" href="/accounts/login">Đăng nhập</a>
+          <a class="dropdown-item" href="/accounts/register">Đăng ký</a>
+          {% else %}
+          <a class="dropdown-item" href="accounts/logout">Thoát tài khoản</a>
+          {% endif %}
+        </div>
+      </span>
+    </div>
+  </nav>
+
+
+  <nav id="status">
+    <div class="container">
+      <div class="row">
+        <div class="col-left col-6">
+          <span>Mạng xã hội:
+            <a href="#"><img src="{% static 'images/status-ico/facebook-icon.png' %}" width="15"></a>
+            <a href="#"><img src="{% static 'images/status-ico/instagram-icon.png' %}" width="15"></a>
+            <a href="#"><img src="{% static 'images/status-ico/zalo-icon.png' %}" width="15"></a>
+            <a href="#"><img src="{% static 'images/status-ico/shopee-icon.png' %}" width="15"></a>
+            <a href="#"><img src="{% static 'images/status-ico/youtube-icon.png' %}" width=" 15"></a>
+          </span>
+          <span>Hotline: <a href="tel:081 904 6668">081 904 6668</a></span>
+        </div>
+        <div class="col-right col-6">
+          <span class="dropdown dropdown-hover">
+            {% if not request.user.is_authenticated %}
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
+            {% else %}
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.username }}</a>
+            {% endif %}
+            <div class="dropdown-menu">
+              {% if not request.user.is_authenticated %}
+              <a class="dropdown-item" href="/accounts/login">Đăng nhập</a>
+              <a class="dropdown-item" href="/accounts/register">Đăng ký</a>
+              {% else %}
+              <a class="dropdown-item" href="/accounts/logout">Thoát tài khoản</a>
+              {% endif %}
+            </div>
+          </span>
+          <span>
+            <a href="/checkout/cart"><i class="fa fa-shopping-bag fa-fw"></i> Giỏ hàng (<b class="data-cart-count">{{ cart_len }}</b>)</a>
+          </span>
+          <span>
+            <a href="/accounts/history"><i class="fa fa-file-text fa-fw"></i> Theo dõi đơn hàng</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SEARCH -->
+  <header id="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="header-logo">
+            <a href="/">
+              <img src="{% static 'images/255x59-02.png' %}" class="margin-left-10" alt="FI :STORE.VN - Làm đẹp chuẩn Hàn, An tâm chính hãng!">
+              <h1 class="d-none">FI :STORE.VN - Làm đẹp chuẩn Hàn, An tâm chính hãng!</h1>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <form action="/search" method="post">
+            {%csrf_token%}
+            <div class="input-group">
+              <input type="search" name="keywords" class="form-control" placeholder="Tìm sản phẩm, thương hiệu bạn mong muốn...">
+
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- END SEARCH-->
+
+  <!-- MENU -->
+  <div id="nav-target"></div>
+  <nav id="navigation">
+    <div class="container">
+      <ul class="nav-wrap">
+        <li class="nav-item">
+          <a class="nav-link" href="/"><i class="fa fa-home fa-lg"></i></a>
+        </li>
+        <li class="nav-item dropdown dropdown-hover">
+          <a href="/products/hot" class="nav-link">HOT ANNIE</a>
+          <div class="dropdown-menu">
+            <div class="cat-thumbnail">
+              <img src="{% static 'images/sale-cat.jpg'%}" alt=" Khuyến mãi" width="350">
+            </div>
+          </div>
+        </li>
+        {% for category in categories %}
+        <li class="nav-item dropdown dropdown-hover">
+          <a href="/categories/{{category.id}}" class="nav-link">{{category.name}}</a>
+          <div class="dropdown-menu">
+            <div class="cat-thumbnail">
+              <img src="{{category.category_img.url}}" alt="{{category.name}}" width="350">
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+
+        {% for brand in brands %}
+        <li class="nav-item dropdown dropdown-hover">
+          <a href="/brands/{{brand.id}}" class="nav-link">{{brand.name}}</a>
+          <div class="dropdown-menu">
+            <div class="cat-thumbnail">
+              <img src="{{brand.brand_img.url}}" alt="{{brand.name}}" width="350">
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+
+
+      </ul>
+    </div>
+  </nav>
+  <!-- END MENU-->
+
+  <div class="container" id="mainContainer">
+    {% block contents %}
+    {% endblock %}
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="row row-mx-5 mb-3">
+          <div class="col-md-3">
+            <div class="footer-logo">
+              <a href="/">
+                <img src="{% static 'images/255x59-02.png' %}" alt="FI :STORE.VN - Làm đẹp chuẩn Hàn, An tâm chính hãng!">
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-3 align-self-center font-weight-bold text-right">
+            <span class="mr-3">Đăng ký nhận email</span>
+          </div>
+          <div class="col-md-4 align-self-center">
+            <form action="#" method="POST" id="newsletterForm">
+              <input type="hidden" name="_token" value="E9FmTqN3SrUPROobP6fSroUY2IIkxHgoRGyn6l6Z">
+              <div class="form-group mb-0">
+                <div class="input-group">
+                  <input type="email" name="email" class="form-control" placeholder="Nhập địa chỉ Email" required>
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary"><i class="fa fa-envelope-open fa-lg"></i></button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row row-mx-5">
+          <div class="col-lg-3 text-center"></div>
+          <div class="col-lg-2 col-md-4">
+            <ul class="list">
+              <li class="list-title">Về ANNIE COSMETIC</li>
+              <li class="list-item"><a href="#" class="list-link">Giới thiệu</a></li>
+              <li class="list-item"><a href="#" class="list-link">Bài viết sự kiện</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-4">
+            <ul class="list">
+              <li class="list-title">Chính sách</li>
+              <li class="list-item"><a href="#" class="list-link">Chính sách bảo mật</a></li>
+              <li class="list-item"><a href="#" class="list-link">Chính sách đổi trả và hoàn tiền</a></li>
+              <li class="list-item"><a href="#" class="list-link">Chính sách vận chuyển giao nhận</a></li>
+              <li class="list-item"><a href="#" class="list-link">Quy định và hình thức thanh toán</a></li>
+              <li class="list-item"><a href="#" class="list-link">Hỏi đáp</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <ul class="list">
+              <li class="list-title">Liên hệ</li>
+              <li class="list-item">Địa chỉ: Annie Cosmetic, 407 Phạm Văn Chiêu, Phường 14, Gò Vấp, TP.Hồ Chí Minh</li>
+              <li class="list-item">Tel: <a href="tel:081 904 6668">081 904 6668</a></li>
+              <li class="list-item">Mail: <a href="#">contact@anniecosmetic.vn</a></li>
+              <li class="list-item mt-2">
+                <a href="#">
+                  <img src="{% static 'images/facebook-ico.png' %}" height="35" style="border-rqcius: 10px">
+                </a>
+                <a href="#">
+                  <img src="{% static 'images/instagram-ico.png' %}" height="35" style="border-radius: 10px">
+                </a>
+                <a href="#">
+                  <img src="{% static 'images/zalo-ico.png' %}" height="35" style="border-rqcius: 10px">
+                </a>
+                <a href="#">
+                  <img src="{% static 'images/shopee-ico.png' %}" height="35" style="border-rqcius: 10px">
+                </a>
+                <a href="#">
+                  <img src="{% static 'images/youtube-ico.png' %}" height="35" style="border-rqcius: 10px">
+                </a>
+              </li>
+              <li class="list-item" style='display:none'>
+                <a href="#">
+                  <img src="{% static 'images/bocongthuong.png' %}" alt="Đã thông báo bộ công thương" height="50">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="mr-1">
+          <div class="d-none d-lg-inline mr-1">Đơn vị vận chuyển</div>
+          <img src="{% static 'images/transportations/giaohangtietkiem.jpg' %}">
+          Giấy phép ĐKKD số: 01255884598 cấp ngày 08/11/2017 tại Sở Kế Hoạch và Đầu tư TP. Hồ Chí Minh
+        </div>
+        <div class="text-md-right">
+          <div class="d-none d-lg-inline mr-1">Phương thức thanh toán</div>
+          <img src="{% static 'images/transactions/tienmat.png' %}">
+          <img src="{% static 'images/transactions/sacombank.jpg' %}">
+        </div>
+      </div>
+    </footer>
+  </div>
+  <!-- MOBILE -->
+  <nav id="navToggle" class="scrollbar">
+    <div class="top">
+      <img src="{% static 'images/255x59-02.png' %}" alt="FI :STORE.VN - Làm đẹp chuẩn Hàn, An tâm chính hãng!">
+    </div>
+    <form class="middle" action="/search" method="post">
+      {%csrf_token%}
+      <div class="form-group">
+        <div class="input-group">
+          <input type="search" class="form-control" name="keywords" placeholder="Tìm kiếm" value="">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" onclick="open_nav()">
+              <svg id="i-search" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                <circle cx="14" cy="14" r="12"></circle>
+                <path d="M23 23 L30 30"></path>
+              </svg>
+            </button>
+          </span>
+        </div>
+      </div>
+    </form>
+    <div class="bottom">
+      <ul class="nav nav-pills nav-justified" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="pill" href="#pillsMenu" role="tab" aria-controls="pillsMenu" aria-selected="true">
+            <i class="fa fa-list-ul fa-lg" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#pillsAuth" role="tab" aria-controls="pillsAuth" aria-selected="true">
+            <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="nav-item close-nav">
+          <a class="nav-link" onclick="close_nav()">
+            <svg id="i-close" viewBox="0 0 32 32" width="15" height="15" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+              <path d="M2 30 L30 2 M30 30 L2 2"></path>
+            </svg>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="pillsMenu" role="tabpanel">
+          <div class="item single">
+            <a href="/">
+              <i class="fa fa-angle-right" aria-hidden="true"></i> Trang chủ
+            </a>
+          </div>
+          <div class="item single">
+            <a href="/products/hot">
+              <i class="fa fa-angle-right" aria-hidden="true"></i> Hot
+            </a>
+          </div>
+          {% for category in categories %}
+          <div class="item">
+            <a href="/categories/{{category.id}}" aria-expanded="false" class="collapsed">
+              <i class="fa fa-angle-right" aria-hidden="true"></i> {{category.name}}
+            </a>
+          </div>
+          {% endfor %}
+          {% for brand in brands %}
+          <div class="item">
+            <a href="/brands/{{brand.id}}" aria-expanded="false" class="collapsed">
+              <i class="fa fa-angle-right" aria-hidden="true"></i> {{brand.name}}
+            </a>
+          </div>
+          {% endfor %}
+
+
+        </div>
+        <div class="tab-pane fade" id="pillsAuth" role="tabpanel">
+          {% if not request.user.is_authenticated %}
+          <div class="item single">
+            <a href="/accounts/login">
+              <i class="fa fa-angle-right" aria-hidden="true"></i> Đăng nhập
+            </a>
+          </div>
+          <div class="item single">
+            <a href="/accounts/register">
+              <i class="fa fa-angle-right" aria-hidden="true"></i> Đăng ký
+            </a>
+          </div>
+          {% else %}
+          <div class="item single">
+            <a href="/accounts/logout">
+              <i class="fa fa-angle-right" aria-hidden="true"></i> Thoát tài khoản
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  </div>
+  <div class="fixedbox" id="supportion">
+    <a href="#" class="fixed-item mb-3">
+      <img src="{% static 'images/support-ico.png' %}">
+      DỊCH VỤ
+    </a>
+    <a href="#" class="fixed-item">
+      <img src="{% static 'images/contact-ico.png' %}">
+      LIÊN HỆ
+    </a>
+  </div>
+  <div class="fixedbox" id="position">
+    <div class="fixed-item mt-4 d-none d-md-block">
+      <img src="{% static 'images/scrolltotop.png' %}" onclick="scroll_top()">
+    </div>
+  </div>
+  <script src="{% static 'js/main.handler.js' %}"></script>
+  <script src="{% static 'js/product-slider.handler.js' %}"></script>
+  <script src="{% static 'libs/jquery-session/jquery-session.js' %}"></script>
+</body>
+
+</html>

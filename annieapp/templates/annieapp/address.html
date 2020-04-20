@@ -1,0 +1,98 @@
+{% extends 'annieapp/base.html' %}
+{% load widget_tweaks %}
+{% load custom_filter %}
+{% block contents %}
+
+<div class="checkout-progress">
+	<li class="d-none d-md-flex"><span class="step">1</span>Giỏ hàng</li>
+	<li class="active"><span class="step">2</span>Địa chỉ giao hàng</li>
+	<li class="d-none d-md-flex"><span class="step">3</span>Thanh toán &amp; Đặt hàng</li>
+</div>
+
+<div class="row">
+	<div class="col-md-10 mx-auto mb-5">
+		<div class="block-checkout">
+			{% if not user.is_authenticated %}
+			<div class="block-header">
+				<div class="block-title"><a href="/accounts/login" class="btn btn-link font-weight-bold fz-up-4">ĐĂNG NHẬP</a>
+					<span style="color: #676767;">hoặc</span>
+					<a href="/accounts/register" class="btn btn-link font-weight-bold fz-up-4">ĐĂNG KÝ</a>
+				</div>
+				<div class="block-description">Để tích lũy điểm và nhận các chương trình ưu đãi từ <strong>Shopa</strong></div>
+
+				<!--
+				<div class="form-group row row-mx-5 my-3">
+					<div class="col-md-4">
+						<div class="fb-login-button">
+							<a href="https://fistore.vn/login/facebook/redirect"><i class="fa fa-facebook-square fa-fw"></i> Đăng nhập bằng Facebook</a>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="gg-login-button">
+							<a href="https://fistore.vn/login/google/redirect"><i class="fa fa-google-plus-square fa-fw"></i> Đăng nhập bằng Google</a>
+						</div>
+					</div>
+				</div>
+				-->
+
+			</div>
+
+
+			<hr>
+			<div class="block-header">
+				<div class="block-title">MUA HÀNG KHÔNG CẦN ĐĂNG NHẬP</div>
+				<div class="block-description">Vui lòng điền thông tin bên dưới</div>
+			</div>
+			{% else %}
+			<div class="block-header">
+				<div class="block-description">Vui lòng điền thông tin bên dưới</div>
+			</div>
+			{% endif %}
+			<div class="block-body">
+				<form method="POST">
+					{%csrf_token%}
+					<div class="row row-mx-10">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="name">Họ tên <span class="required">*</span></label>
+								{% render_field form.name class="form-control" required="True" placeholder="Nhập họ tên" %}
+							</div>
+							<div class="form-group">
+								<label for="phone">Điện thoại liên hệ <span class="required">*</span></label>
+								{% render_field form.phone_number class="form-control" required="True" placeholder="Nhập số điện thoại" %}
+							</div>
+							<div class="form-group">
+								<label for="email">Địa chỉ email <span class="required">*</span></label>
+								{% render_field form.email class="form-control" required="True" placeholder="Nhập địa chỉ email" %}
+							</div>
+							<div class="form-group sortdesktop">
+								<label class="mb-3">Để nhận hàng thuận tiện hơn, bạn vui lòng cho <strong>Shopa</strong> biết nơi nhận hàng cụ thể:</label>
+								<div class="form-group">
+									<div class="form-check">
+										{% render_field form.type class="form-check-input" type="radio" %}
+									</div>
+								</div>
+								<label id="address_type-error" class="error" for="address_type" style="display: none;"></label>
+
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="address">Địa chỉ <span class="required">*</span></label>
+								{% render_field form.address class="form-control" required="True" placeholder="Vd: 45, điện biên phủ, p10, q1, hcm...." rows="3" %}
+							</div>
+						</div>
+					</div>
+
+
+			</div>
+			<div class="form-group mt-5">
+				<div class="checkout-button">
+					<button type="submit" class="btn btn-primary">GIAO ĐẾN ĐỊA CHỈ NÀY</button>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

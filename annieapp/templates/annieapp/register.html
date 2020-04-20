@@ -1,0 +1,79 @@
+{% extends 'annieapp/base.html' %}
+{% load widget_tweaks %}
+{% block contents %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="block-auth">
+				<div class="card my-5">
+					<div class="card-header">{{ page_name }}</div>
+					<div class="card-body">
+
+
+						<form method="POST" autocomplete="off">
+							{% csrf_token %}
+							{% for field in form %}
+							<div class="form-group row">
+								<label for="name" class="col-md-4 col-form-label text-md-right">{{ field.label_tag }}</label>
+								<div class="col-md-6">
+									{% render_field field class="form-control" %}
+									{% for error in field.errors %}
+									<p style="color: red">{{ error }}</p>
+									{% endfor %}
+								</div>
+							</div>
+							{% endfor %}
+							<div class="form-group row mb-0">
+								<label class="col-md-4 col-form-label text-md-right">&emsp;</label>
+								<div class="col-md-6">
+									{% if form.errors %}
+									<p style="color: red"> Tên đăng nhập hoặc mật khẩu không đúng</p>
+									{% endif %}
+								</div>
+							</div>
+
+
+
+							<div class="form-group row mb-0">
+								<label class="col-md-4 col-form-label text-md-right">&emsp;</label>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-primary">
+										{{ page_name }}
+									</button>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="email" class="col-md-4 text-md-right">
+								</label>
+								<div class="col-md-6">
+									<hr class="my-5">
+									<div class="fb-login-button">
+										<a href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook-square fa-fw"></i> Đăng nhập bằng Facebook</a>
+									</div>
+								</div>
+							</div>
+
+							<!--
+							<div class="form-group row">
+								<label for="email" class="col-md-4 text-md-right">
+								</label>
+								<div class="col-md-6">
+									<hr class="my-5">
+									<div class="fb-login-button">
+										<a href="https://fistore.vn/login/facebook/redirect"><i class="fa fa-facebook-square fa-fw"></i> Đăng nhập bằng Facebook</a>
+									</div>
+									<div class="gg-login-button">
+										<a href="https://fistore.vn/login/google/redirect"><i class="fa fa-google-plus-square fa-fw"></i> Đăng nhập bằng Google</a>
+									</div>
+								</div>
+							</div>
+						-->
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

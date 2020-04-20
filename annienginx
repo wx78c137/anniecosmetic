@@ -1,0 +1,55 @@
+server {
+    listen 80;
+    server_name anniecosmetic.vn;
+
+
+    location ~ /.well-known {
+        root /home/vuhoang/well-known;
+    }
+
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+
+}
+
+server {
+    listen 443 ssl;
+    server_name anniecosmetic.vn;
+    ssl_certificate /etc/letsencrypt/live/anniecosmetic.vn/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/anniecosmetic.vn/privkey.pem;
+    client_max_body_size 12M;
+
+    location = /favicon.ico {
+     access_log off; log_not_found off;
+     }
+
+
+    location /static/ {
+        root /home/vuhoang/MyProject/anniecosmetic;
+    }
+
+
+    location /media/ {
+        root /home/vuhoang/MyProject/anniecosmetic;
+    }
+
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/vuhoang/MyProject/anniecosmetic/anniecosmetic.sock;
+    }
+
+}
+
+server {
+    listen 80;
+    server_name thecircle.vn;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/vuhoang/MyProject/thecircle/thecircle.sock;
+    }
+}

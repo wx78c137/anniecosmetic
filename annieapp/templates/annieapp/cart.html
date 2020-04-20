@@ -1,0 +1,124 @@
+{% extends 'annieapp/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load cropping %}
+{% load custom_filter %}
+{% block contents %}
+<div class="checkout-progress">
+	<li class="active"><span class="step">1</span>Giỏ hàng</li>
+	<li class="d-none d-md-flex"><span class="step">2</span>Địa chỉ giao hàng</li>
+	<li class="d-none d-md-flex"><span class="step">3</span>Thanh toán & Đặt hàng</li>
+</div>
+{% if cart_len == 0 %}
+<div class="block-cart" id="cartEmpty">
+	<img src="{% static 'images/empty-cart.png' %}" width="200">
+	<div class="cart-empty-title">Chưa có sản phẩm nào trong giỏ hàng!</div>
+	<div class="cart-empty-description">
+		Trước khi thực hiện mua hàng, bạn cần thêm vài sản phẩm vào giỏ trước.
+	</div>
+	<a href="/" class="btn btn-link">Tiếp tục mua hàng <i class="fa fa-angle-double-right"></i></a>
+</div>
+{% else %}
+<div class="block-cart" id="cartNotEmpty">
+	<div class="row">
+		<div class="col-lg-9 mb-4">
+			<table width="100%" cellpadding="10" class="cart-content desktop">
+				<tbody>
+					{% for item in cart %}
+					{% with product_version=item.product_version  %}
+					<tr>
+						<td width="120">
+							<img src="{% cropped_thumbnail product_version.product "cropping_img_1" %}" alt="{{ product_version.product.name }}" title="Son Black Rouge Air Fit Velvet Mini Kit [WILD CAT]" width="100%" class="cart-product-thumbnail">
+						</td>
+						<td>
+							<div class="cart-product-name">
+								<a href="/products/{{ product_version.product.id }}" target="_blank">
+									{% if product_version.name != 'none' %}
+									{{ product_version.product.name }} + Tùy chọn: {{ product_version.name }}
+									{% else %}
+									{{ product_version.product.name }}
+									{% endif %}
+								</a>
+							</div>
+							<div class="cart-product-price">{{product_version.product.price | thousand_seperator }} đ</div>
+
+							<strike class="cart-product-original_price">{{ product_version.product.stock_price | thousand_seperator}} đ</strike>
+
+
+
+							<div><button class="btn btn-remove" onclick="location.href='/checkout/remove/{{ product_version.id }}'"><i class="fa fa-trash"></i> Xóa</button></div>
+							<input type="hidden" name="rowId" value="d3d934f4a32bb37faab627ea8f16ad69">
+						</td>
+						<td width="60">
+							<form action="/checkout/update/{{ product_version.id }}" method="post">
+								{% csrf_token %}
+								<div class="custom-number">
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button type="button" class="btn quantity-minus" onclick="quantity_sub(event);">-</button>
+										</span>
+										{% render_field form.quantity value=item.quantity id="quantity"  min="1"%}
+										<span class="input-group-btn">
+											<button type="button" class="btn quantity-plus" onclick="quantity_add(event);">+</button>
+										</span>
+										<div class="block-single-actions">
+											<button type="submit" class="btn btn-add-to-cart">Cập nhật</button>
+										</div>
+									</div>
+								</div>
+
+
+							</form>
+						</td>
+					</tr>
+					{% endwith %}
+					{% endfor %}
+				</tbody>
+			</table>
+			<hr>
+			<a href="/" class="btn btn-link">Tiếp tục mua hàng <i class="fa fa-angle-double-right"></i></a>
+		</div>
+		<div class="col-lg-3 mb-4">
+			<aside class="aside-cart">
+				<div class="aside-header">Hiện có <span class="data-cart-count fz-up-2">1</span> sản phẩm</div>
+				<div class="aside-body">
+					<table width="100%" cellpadding="10">
+						<tbody>
+							<tr>
+								<td>Tạm tính:</td>
+								<td align="right"><span class="data-cart-subtotal">{{cart.get_total_price | thousand_seperator}}</span>đ</td>
+							</tr>
+
+
+							<tr>
+								<td>Thành tiền:</td>
+								<td align="right">
+									<strong class="strong-text">
+										<span class="data-cart-total">
+											{{cart.get_total_price | thousand_seperator}}</span>đ</strong><br>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</aside>
+			<aside class="aside-cart mb-4">
+				<div class="aside-header">Mã giảm giá</div>
+				{% if not request.user.is_authenticated %}
+				<div class="aside-body p-3"><a class="text-primary" href="/accounts/login">Đăng nhập</a> để sử dụng mã giảm giá</div>
+				{% else %}
+
+				<div class="aside-body p-3 text-center">-10% tổng đơn khi giao hàng</div>
+				{% endif %}
+			</aside>
+
+			<div class="checkout-button">
+				<a href="/checkout/address" class="btn btn-primary btn-block">TIẾN HÀNH THANH TOÁN</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

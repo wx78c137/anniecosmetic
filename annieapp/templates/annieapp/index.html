@@ -1,0 +1,239 @@
+{% extends 'annieapp/base.html' %}
+{% load custom_filter %}
+{% load cropping %}
+{% block contents %}
+
+
+
+
+
+<div class="block-banner mb-4">
+  <div class="owl-carousel" id="bannerSlider">
+    {%for banner in banners %}
+    <div class="item">
+      <a href="#">
+        <img src="{% cropped_thumbnail banner "cropping" %}" alt="{{ banner.name }}" width="100%">
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<div class="block-qcs my-2 my-md-4 d-none d-md-block">
+  <div class="owl-carousel sub-banner-slider">
+    <div class="item">
+      <a href="#">
+        <img src="https://cdn.fistore.vn/media/slides/fi-store-block-quang-cao-1-jtant.jpg" alt="fi-store-block-quang-cao-1-jtANt" width="100%">
+      </a>
+    </div>
+    <div class="item">
+      <a href="#">
+        <img src="https://cdn.fistore.vn/media/slides/fi-store-block-quang-cao-1-4wku0.jpg" alt="fi-store-block-quang-cao-1-4wku0" width="100%">
+      </a>
+    </div>
+    <div class="item">
+      <a href="#">
+        <img src="https://cdn.fistore.vn/media/slides/fi-store-block-quang-cao-1-rvdzt.jpg" alt="fi-store-block-quang-cao-1-RVdzt" width="100%">
+      </a>
+    </div>
+  </div>
+</div>
+<div class="block-brands my-4">
+  <div class="owl-carousel" id="brandSlider">
+  </div>
+  <script>
+    $('#brandSlider').owlCarousel({
+      loop: true,
+      margin: 10,
+      nav: false,
+      dots: false,
+      autoplay: true,
+      autoplayTimeout: 3000,
+      smartSpeed: 700,
+      responsive: {
+        0: {
+          items: 4
+        },
+        768: {
+          items: 7
+        },
+        992: {
+          items: 9
+        },
+        1200: {
+          items: 10
+        },
+      },
+    })
+  </script>
+</div>
+
+<!-- Hotdeal -->
+<!-- End Hotdeal -->
+
+<!-- Khuyến mãi -->
+<div class="block-primary my-2 my-md-4">
+  <div class="block-header">
+    <div class="block-title">Khuyến mãi</div>
+    <ul class="nav-product saleoff">
+    </ul>
+    <div class="view-more" style="margin-top: 1.5rem">
+      <a href="/products/sale">
+        Xem thêm <i class="fa fa-angle-double-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="block-body tab-contain saleoff">
+    <div class="tab-panel" id="tabSaleOf">
+      <div class="owl-carousel product-slider" id="owlSaleOf">
+
+        {% for product in sale_products %}
+        <div class="item">
+          <div class="item-product">
+            <div class="item-thumbnail item-thumbnail1">
+              <a href="products/{{ product.id }}">
+                <img src="{% cropped_thumbnail product "cropping_img_1" %}" alt="{{  product.name }}">
+              </a>
+              <label class="saleof"> -{{ product.sale_off }}%</label>
+            </div>
+            <div class="item-info item-info1">
+              <div class="item-brand-name">
+                <a href="#">{{ product.category.name }}</a>
+              </div>
+              <div class="item-name">
+                <a href="products/{{ product.pk }}">{{ product.name }}</a>
+              </div>
+              <div class="item-price">
+                {{product.price | thousand_seperator}} đ
+                <strike class="fz-down-1 text-muted">{{product.stock_price | thousand_seperator}} đ</strike>
+              </div>
+              <div class="item-action">
+                <a href="products/{{ product.pk }}" class="btn btn-primary btn-block">XEM NGAY</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Khuyến mãi -->
+
+<!-- Hàng bán chạy -->
+<div class="block-primary my-2 my-md-4">
+  <div class="block-header">
+    <div class="block-title">Hàng bán chạy</div>
+    <div class="view-more">
+      <a href="/products/hot">
+        Xem thêm <i class="fa fa-angle-double-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="block-body">
+    <div class="owl-carousel product-slider">
+      {% for product in best_products %}
+      <div class="item">
+        <div class="item-product">
+          <div class="item-thumbnail item-thumbnail1">
+            <a href="products/{{ product.pk }}">
+              <img src="{% cropped_thumbnail product "cropping_img_1" %}" alt="{{  product.name }}">
+            </a>
+            <label class="saleof"> -{{ product.sale_off }}%</label>
+          </div>
+          <div class="item-info item-info1">
+            <div class="item-brand-name">
+              <a href="#">{{ product.category.name }}</a>
+            </div>
+            <div class="item-name">
+              <a href="products/{{ product.pk }}">{{ product.name }}</a>
+            </div>
+            <div class="item-price">
+              {{product.price | thousand_seperator}} đ
+              <strike class="fz-down-1 text-muted">{{product.stock_price | thousand_seperator}} đ</strike>
+            </div>
+            <div class="item-action">
+              <a href="products/{{ product.pk }}" class="btn btn-primary btn-block">XEM NGAY</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- End Hàng bán chạy -->
+
+<div class="block-qcs my-2 my-md-4">
+  <div class="owl-carousel sub-banner-slider">
+    <div class="item">
+      <a href="#">
+        <img src="https://cdn.fistore.vn/media/slides/fi-store-block-quang-cao-3-zx37t.jpg" alt="fi-store-block-quang-cao-3-zX37T" width="100%">
+      </a>
+    </div>
+    <div class="item">
+      <a href="#">
+        <img src="https://cdn.fistore.vn/media/slides/fi-store-block-quang-cao-3-gphku.jpg" alt="fi-store-block-quang-cao-3-gpHku" width="100%">
+      </a>
+    </div>
+    <div class="item">
+      <a href="#">
+        <img src="https://cdn.fistore.vn/media/slides/fi-store-block-quang-cao-3-je44s.jpg" alt="fi-store-block-quang-cao-3-JE44s" width="100%">
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Hàng mới về -->
+<div class="block-primary my-2 my-md-4">
+  <div class="block-header">
+    <div class="block-title">Hàng mới về</div>
+    <div class="view-more">
+      <a href="/products/new">
+        Xem thêm <i class="fa fa-angle-double-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="block-body">
+    <div class="owl-carousel product-slider">
+      {% for product in new_products %}
+      <div class="item">
+        <div class="item-product">
+          <div class="item-thumbnail item-thumbnail1">
+            <a href="products/{{ product.pk }}">
+              <img src="{% cropped_thumbnail product "cropping_img_1" %}" alt="{{  product.name }}">
+            </a>
+            <label class="saleof"> -{{ product.sale_off }}%</label>
+          </div>
+          <div class="item-info item-info1">
+            <div class="item-brand-name">
+              <a href="#">{{ product.category.name }}</a>
+            </div>
+            <div class="item-name">
+              <a href="products/{{ product.pk }}">{{ product.name }}</a>
+            </div>
+            <div class="item-price">
+              {{product.price | thousand_seperator}} đ
+              <strike class="fz-down-1 text-muted">{{product.stock_price | thousand_seperator}} đ</strike>
+            </div>
+            <div class="item-action">
+              <a href="products/{{ product.pk }}" class="btn btn-primary btn-block">XEM NGAY</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- End Hàng mới về -->
+
+<!-- Free Try -->
+<!-- End Free Try -->
+
+<!-- Bài viết - Sự kiện -->
+
+
+<!-- End Bài viết - Sự kiện -->
+{% endblock %}
