@@ -20,6 +20,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['order_code', 'name', 'email', 'address',
                     'confirm', 'paid', 'created','get_order_user', 'total_cost']
     list_filter = ['confirm', 'paid', 'created']
+    search_fields= ['order_code']
 
     inlines = [OrderItemInline]
 
@@ -36,6 +37,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(ImageCroppingMixin, admin.ModelAdmin):
     readonly_fields = ['price']
     list_display = ['name','category', 'get_price']
+    search_fields = ['name']
     inlines =[OptionsInline]
 
 

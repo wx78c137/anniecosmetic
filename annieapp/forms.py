@@ -13,3 +13,8 @@ class AddressForm(forms.ModelForm):
 	class Meta:
 		model = Order
 		fields = ['name', 'phone_number', 'address', 'type', 'email']
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['confirm', 'paid']

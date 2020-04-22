@@ -1,0 +1,60 @@
+{% extends 'annieapp/mobile_base.html'%}
+{% load static %}
+{% load cropping %}
+{% load custom_filter %}
+{% block contents %}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Đơn hàng: {{ order.order_code }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="d-inline-block col-12">
+        <div>
+          <p>Tên khách hàng: {{ order.name }}</p>
+          <p>Địa chỉ: {{order.address}}</p>
+          <p>Số điện thoại: {{order.phone_number}}</p>
+          {% if order.confirm and not order.paid %}
+          <p class="mobile-order-warning">Tình trạng: Đã xác nhận</p>
+          {% elif order.paid %}
+          <p class="mobile-order-success">Tình trạng: Đã thanh toán </p>
+          {% else %}
+          <p class="mobile-order-danger">Tình trạng: Chưa xác nhận </p>
+          {% endif %}
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block mobile" onclick="location.href='/mobile/orders/edit/{{order.id}}';">Thay đổi tình trạng đơn hàng</button>
+          <p></p>
+
+        </div>
+      </td>
+
+  </tbody>
+</table>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Thông tin sản phẩm</th>
+    </tr>
+  </thead>
+  <tbody>
+    </tr>
+    {% for item in items %}
+    <tr>
+      <td>
+        <p>{{ item.quantity }} <a href="/products/{{item.product_version.product.id }}" target="_blank">{{item.product_version.product.name}}</a> Tùy chọn: {{item.product_version.name}}</p>
+      </td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td>
+        <p>Tổng tiền: {{ order.total_cost }}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+{% endblock %}

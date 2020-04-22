@@ -40,7 +40,10 @@ urlpatterns = [
     path('page/dich-vu', views.dich_vu),
     path('categories/<int:id>', views.get_product_category),
     path('brands/<int:id>', views.get_product_brand),
-    path('search', views.search)
+    path('search', views.search),
+    path('mobile/orders', views.get_mobile_orders),
+    path('mobile/orders/<int:id>', views.get_mobile_order_detail, name='mobile-order-detail'),
+    path('mobile/orders/edit/<int:id>', views.edit_mobile_order),
 ]
 urlpatterns += staticfiles_urlpatterns()
 if settings.DEBUG: # new

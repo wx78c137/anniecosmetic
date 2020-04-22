@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ANNIE COSMETIC - Làm đẹp chuẩn Hàn, An tâm chính hãng!</title>
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  <link rel="icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Varela+Round&amp;subset=latin-ext,vietnamese">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+  <div class="container-fluid mobile">
+
+    <div class="mobile-order-logo">
+      <img class="mx-auto d-block" src="{% static 'images/255x59-02.png' %}" alt="">
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-dark bg-dark mobile-nav">
+      <a class="navbar-brand mobile" href="/mobile/orders"><i class="fas fa-home mobile-icon"></i></a>
+      <a class="navbar-brand mobile" href="#"><i class="fas fa-file-invoice mobile-icon"></i></a>
+      <a class="navbar-brand mobile" href="#"><i class="fas fa-user mobile-icon"></i></a>
+      <a class="navbar-brand mobile" href="#"><i class="fas fa-search mobile-icon"></i></a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/mobile/orders">Đơn hàng<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {% block contents %}
+    {% endblock %}
+  </div>
+</body>
+
+<footer>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/8ca29e9b4c.js" crossorigin="anonymous"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+</footer>

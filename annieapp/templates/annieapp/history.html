@@ -5,7 +5,11 @@
     <aside class="block-user d-none d-md-block mt-4 mb-4">
       <div class="user-describe">
         <div class="user-info">
+          {% if request.user.first_name and request.user.last_name %}
+          <div class="user-name">{{request.user.last_name}} {{ request.user.first_name }}</div>
+          {% else %}
           <div class="user-name">{{request.user.username}}</div>
+          {% endif %}
           <div class="user-email">{{request.user.email}}</div>
         </div>
       </div>
