@@ -42,7 +42,7 @@
     {% for item in items %}
     <tr>
       <td>
-        <p>{{ item.quantity }} <a href="/products/{{item.product_version.product.id }}" target="_blank">{{item.product_version.product.name}}</a> Tùy chọn: {{item.product_version.name}}</p>
+        <p>{{ item.quantity }} x <a href="/products/{{item.product_version.product.id }}" target="_blank">{{item.product_version.product.name}}</a> + Tùy chọn: {{item.product_version.name}}</p>
       </td>
     </tr>
     {% endfor %}

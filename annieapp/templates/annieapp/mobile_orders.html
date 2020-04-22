@@ -7,7 +7,7 @@
     {% for order in orders%}
     <tr>
       <td class="d-inline-block col-8">
-        <div><a href="/mobile/orders/{{ order.id }}">{{ order.order_code }}</a></div>
+        <div><a class="mobile-link" href="/mobile/orders/{{ order.id }}">{{ order.order_code }}</a></div>
         <div class="mobile-order-info">
           <p>{{ order.name }}</p>
           {% if order.confirm %}

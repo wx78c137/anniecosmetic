@@ -758,7 +758,8 @@ div[data-arrow="true"]:not(.collapsed)::before{transform:rotate(90deg);content:"
   margin-left: 10px;
 }
 .mobile {
-font-size: 30px;
+font-size: 40px;
+font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .mobile-order-info{
 color: #ababab;
@@ -779,13 +780,16 @@ color: #ababab;
   padding: 25px 0 25px 0;
 }
 .mobile-nav {
-  height: 80px;
+  height: 130px;
 }
 .mobile-icon {
-  font-size: 45px;
+  font-size: 55px;
   padding: 0 40px 0 40px;
 }
 .mobile-checkbox{
   width: 30px;
   height: 30px;
+}
+.mobile-link{
+  color: #444444;
 }
