@@ -757,39 +757,3 @@ div[data-arrow="true"]:not(.collapsed)::before{transform:rotate(90deg);content:"
 .margin-left-10 {
   margin-left: 10px;
 }
-.mobile {
-font-size: 40px;
-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-.mobile-order-info{
-color: #ababab;
-}
-.mobile-order-info p {
-  display: inline;
-}
-.mobile-order-danger {
-  color: #d25b5b;
-}
-.mobile-order-warning {
-  color: #d2b45b;
-}
-.mobile-order-success {
-  color: #3bbb57;
-}
-.mobile-order-logo{
-  padding: 25px 0 25px 0;
-}
-.mobile-nav {
-  height: 130px;
-}
-.mobile-icon {
-  font-size: 55px;
-  padding: 0 40px 0 40px;
-}
-.mobile-checkbox{
-  width: 30px;
-  height: 30px;
-}
-.mobile-link{
-  color: #444444;
-}

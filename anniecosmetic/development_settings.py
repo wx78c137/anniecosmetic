@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'image_cropping',
     'djcelery_email',
     'social_django',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -164,3 +165,8 @@ LOGOUT_REDIRECT_URL = 'login'
 SOCIAL_AUTH_FACEBOOK_KEY = 209055367214890
 with open('/etc/fb_secret.txt') as f:
     SOCIAL_AUTH_FACEBOOK_SECRET= f.read().strip()
+#REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

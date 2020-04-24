@@ -19,6 +19,10 @@ from annieapp import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'orders', views.OrderViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,9 +45,9 @@ urlpatterns = [
     path('categories/<int:id>', views.get_product_category),
     path('brands/<int:id>', views.get_product_brand),
     path('search', views.search),
-    path('mobile/orders', views.get_mobile_orders),
-    path('mobile/orders/<int:id>', views.get_mobile_order_detail, name='mobile-order-detail'),
-    path('mobile/orders/edit/<int:id>', views.edit_mobile_order),
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
 ]
 urlpatterns += staticfiles_urlpatterns()
 if settings.DEBUG: # new

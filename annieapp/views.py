@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
-from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import cartForm, AddressForm, OrderForm
-from .cart import Cart
 from django.conf import settings
 from django.core.paginator import Paginator
-from django.contrib.admin.views.decorators import staff_member_required
+from rest_framework import viewsets
+from rest_framework import permissions
+from .models import *
+from .forms import cartForm, AddressForm, OrderForm
+from .cart import Cart
+from .serializers import OrderSerializer
+
 
 
 # Create your views here.
@@ -246,29 +249,10 @@ def search(request):
         page_obj = paginator.get_page(page_number)
         return render(request, 'annieapp/product_filter.html', {'products': products, 'page_obj': page_obj, 'page_name': page_name})
 
-# MOBILE
-@staff_member_required
-def get_mobile_orders(request):
-    page_name = 'Danh sách đơn hàng'
-    orders = Order.objects.all()
-    return render(request, 'annieapp/mobile_orders.html', {'orders': orders, 'page_name': page_name})
-
-
-@staff_member_required
-def get_mobile_order_detail(request, id):
-    order = get_object_or_404(Order, id=id)
-    items = OrderItem.objects.filter(order=order)
-    return render(request, 'annieapp/mobile_order_detail.html', {'order': order, 'items': items})
-
-
-@staff_member_required
-def edit_mobile_order(request, id):
-    order=get_object_or_404(Order, id=id)
-    if request.method == 'POST':
-        form = OrderForm(request.POST, instance= order)
-        if form.is_valid():
-            form.save()
-            return redirect('mobile-order-detail', id=order.id)
-    form = OrderForm()
-    form.initial={'confirm':order.confirm, 'paid': order.paid}
-    return render(request, 'annieapp/mobile_edit_order.html', {'form': form, 'order':order})
+#REST API
+class OrderViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer

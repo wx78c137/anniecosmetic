@@ -104,6 +104,9 @@ class Options(models.Model):
         name = self.product.name + ' + Tùy chọn: ' + self.name
         return name
 
+    def get_product_name(self):
+        return self.product.name
+
 
 class Order(models.Model):
     order_code = models.CharField(
@@ -179,6 +182,12 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+    def get_option_name(self):
+        return self.product_version.name
+
+    def get_product_name(self):
+        return self.product_version.get_product_name()
 
 
 @receiver(post_save, sender=Product, dispatch_uid="create_options")
