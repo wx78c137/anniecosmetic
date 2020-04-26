@@ -47,6 +47,7 @@ urlpatterns = [
     path('search', views.search),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/login', views.api_login)
 
 ]
 urlpatterns += staticfiles_urlpatterns()

@@ -202,6 +202,9 @@ def create_options(sender, instance, **kwargs):
 def after_order_save(sender, instance, created, **kwargs):
     if created:
         emails = ['vuhoang17891@gmail.com', ]
+        staff = User.objects.filter(is_staff=True)
+        for p_staff in staff:
+            emails.append(p_staff.email)
         order_notice(instance, emails)
 
 

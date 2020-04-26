@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'djcelery_email',
     'social_django',
     'rest_framework',
-
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -174,5 +174,10 @@ with open('/etc/fb_secret.txt') as f:
 #REST FRAMEWORK
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser', )
 }
