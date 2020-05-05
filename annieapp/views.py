@@ -6,9 +6,10 @@ from django.core.paginator import Paginator
 from rest_framework import viewsets
 from rest_framework import permissions
 from .models import *
+from django.contrib.auth.models import User
 from .forms import cartForm, AddressForm, OrderForm
 from .cart import Cart
-from .serializers import OrderSerializer
+from .serializers import OrderSerializer, UserSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -19,7 +20,6 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 from rest_framework.response import Response
-
 
 
 # Create your views here.
@@ -259,7 +259,7 @@ def search(request):
         page_obj = paginator.get_page(page_number)
         return render(request, 'annieapp/product_filter.html', {'products': products, 'page_obj': page_obj, 'page_name': page_name})
 
-#REST API
+# REST API
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -274,7 +274,7 @@ def api_login(request):
         return Response({'error': 'Invalid Credentials'},
                         status=HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
-    return Response({'token': token.key},
+    return Response({'token': token.key, 'userId': user.id},
                     status=HTTP_200_OK)
 
 
@@ -284,3 +284,8 @@ class OrderViewSet(viewsets.ModelViewSet):
     """
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
