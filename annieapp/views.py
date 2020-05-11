@@ -27,9 +27,9 @@ from rest_framework.response import Response
 
 def index(request):
     banners = Banner.objects.all().order_by('-id')
-    sale_products = Product.objects.filter(is_on_sale=True)[:10].order_by('-id')
-    best_products = Product.objects.filter(is_best_product=True)[:10].order_by('-id')
-    new_products = Product.objects.filter(is_new_product=True)[:10].order_by('-id')
+    sale_products = Product.objects.filter(is_on_sale=True).order_by('-id')[:10]
+    best_products = Product.objects.filter(is_best_product=True).order_by('-id')[:10]
+    new_products = Product.objects.filter(is_new_product=True).order_by('-id')[:10]
     return render(request, 'annieapp/index.html', {'banners': banners, 'sale_products': sale_products, 'best_products': best_products, 'new_products': new_products})
 
 # PRODUCT
