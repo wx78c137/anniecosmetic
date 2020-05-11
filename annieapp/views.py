@@ -26,7 +26,7 @@ from rest_framework.response import Response
 
 
 def index(request):
-    banners = Banner.objects.all().order_by('creation_date')
+    banners = Banner.objects.all().order_by('-id')
     sale_products = Product.objects.filter(is_on_sale=True)[:10]
     best_products = Product.objects.filter(is_best_product=True)[:10]
     new_products = Product.objects.filter(is_new_product=True)[:10]
