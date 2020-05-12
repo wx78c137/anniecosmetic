@@ -53,6 +53,10 @@
           <td>Hoàn thành</td>
           {% elif order.confirm %}
           <td>Đã xác nhận</td>
+          {% elif order.delivery %}
+          <td>Đang giao hàng</td>
+          {% elif order.cancel %}
+          <td>Đã hủy</td>
           {% else %}
           <td>Chờ xác nhận</td>
           {% endif %}

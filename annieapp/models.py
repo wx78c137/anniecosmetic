@@ -124,6 +124,8 @@ class Order(models.Model):
     updated = models.DateTimeField(verbose_name='Chỉnh sửa lúc', auto_now=True)
     confirm = models.BooleanField(verbose_name='Đã xác nhận', default=False)
     paid = models.BooleanField(verbose_name='Đã thanh toán', default=False)
+    delivery = models.BooleanField(verbose_name='Đang giao hàng', default=False)
+    cancel = models.BooleanField(verbose_name='Đã Hủy', default=False)
 
     class Meta:
         ordering = ('-created', )

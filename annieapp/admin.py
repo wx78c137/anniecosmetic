@@ -18,7 +18,7 @@ class OrderItemInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['user', 'order_code']
     list_display = ['order_code', 'name', 'email', 'address',
-                    'confirm', 'paid', 'created','get_order_user', 'total_cost']
+                    'confirm', 'paid', 'created','delivery', 'cancel','get_order_user', 'total_cost']
     list_filter = ['confirm', 'paid', 'created']
     search_fields= ['order_code']
 
