@@ -12,7 +12,7 @@ django-appconf==1.0.4
 django-celery-email==3.0.0
 django-image-cropping==1.4.0
 django-widget-tweaks==1.4.8
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 easy-thumbnails==2.7
 idna==2.9
 importlib-metadata==1.6.0
